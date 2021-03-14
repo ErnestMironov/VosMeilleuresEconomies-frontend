@@ -3,6 +3,7 @@ import Router from 'vue-router'
 //routes
 import dossierRoutes from './dossier';
 import secretaryRoutes from './secretary';
+import economiesRoutes from './economies';
 
 let mainRoute = [
 	{
@@ -11,12 +12,12 @@ let mainRoute = [
 	},
 	{
 		path: '*',
-        redirect: '/pages/error-404'
+		redirect: '/pages/error-404'
 	},
 	{
 		path: '/pages',
-        component: () => import('Views/layout/SecretaryLayout.vue'),
-        children: [
+		component: () => import('Views/layout/SecretaryLayout.vue'),
+		children: [
 			{
 				path: 'error-404',
 				name: 'page-error-404',
@@ -31,24 +32,25 @@ let mainRoute = [
 
 const routes = mainRoute.concat(
 	dossierRoutes,
-	secretaryRoutes
+	secretaryRoutes,
+	economiesRoutes
 )
 
 const scrollBehavior = (to, from, savedPosition) => {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      const position = {};
-      if (to.matched.some(m => m.meta.scrollToTop)) {
-        position.x = 0;
-        position.y = 0;
-      }
-      return position;
-    }
+	if (savedPosition) {
+		return savedPosition;
+	} else {
+		const position = {};
+		if (to.matched.some(m => m.meta.scrollToTop)) {
+			position.x = 0;
+			position.y = 0;
+		}
+		return position;
+	}
 }
- 
 
-const createRouter =  () => { 
+
+const createRouter = () => {
 	const router = new Router({
 		mode: 'history',
 		scrollBehavior,
@@ -58,9 +60,9 @@ const createRouter =  () => {
 		const subsequentMiddleware = middleware[index];
 		if (!subsequentMiddleware) return context.next;
 		return (...parameters) => {
-		context.next(...parameters);
-		const nextMiddleware = nextFactory(context, middleware, index + 1);
-		subsequentMiddleware({ ...context, next: nextMiddleware });
+			context.next(...parameters);
+			const nextMiddleware = nextFactory(context, middleware, index + 1);
+			subsequentMiddleware({ ...context, next: nextMiddleware });
 		};
 	}
 	router.beforeEach((to, from, next) => {

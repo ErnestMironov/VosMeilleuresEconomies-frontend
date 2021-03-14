@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    enabled: ( process.env.NODE_ENV == 'production' ? true :  false ),
+    enabled: (process.env.NODE_ENV == 'production' ? true : false),
     content: [
       './src/**/*.html',
       './src/**/*.vue',
@@ -60,6 +60,8 @@ module.exports = {
       },
       colors: {
         t_disabled: '#848080',
+        t_cyan: '#42c6c6',
+        t_dark_cyan: '#117979',
         t_dark_green: '#0f674f',
         tdarkblue: '#1E4355',
         tgreen: '#316f03',
@@ -67,7 +69,7 @@ module.exports = {
         tdanger: '#e3342f',
         twarning: '#ff9966',
         t_dark_warning: '#f37333'
-        
+
       },
     },
   },
